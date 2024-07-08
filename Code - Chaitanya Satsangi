@@ -1,0 +1,44 @@
+CODE
+
+s = input()
+
+lst = []
+a = []
+
+alp = "abcdefghijklmnopqrstuvwxyz"
+
+if len(s) in list(range(4, 10001)):
+    for i in range(len(s)):
+        lst.append(alp.index(s[i]))
+
+    lst.sort()
+
+    for i in range(len(lst)):
+        if lst[i-1] != lst[i]:
+            a.append(".")
+            a.append(lst[i])
+        else:
+            a.append(lst[i])
+
+    a.append(".")
+    c = 0
+    d = {}
+
+    for i in range(len(a)):
+        if a[i] == ".":
+            d[a[i-1]] = c
+            c = 0
+            continue
+        else:
+            c += 1
+
+    del d["."]
+
+if len(d) > 3:
+    k = list(d.keys())
+    v = list(d.values())
+
+    for i in range(3):
+        print(alp[k[v.index(max(v))]], max(v))
+        k.remove(k[v.index(max(v))])
+        v.remove(max(v))
